@@ -13,13 +13,12 @@ def clean_seq(seq):
 
     return seq_clean
 
-clean_dna_seq = clean_seq(dna_seq)
-ready_dna = "".join(clean_dna_seq).upper()
+clean_dna = "".join(clean_seq(dna_seq)).upper()
 
 try:
-    gc_content = (ready_dna.count('G') + ready_dna.count("C"))/len(ready_dna)
+    gc_content = (clean_dna.count('G') + clean_dna.count("C"))/len(clean_dna)
     print(f"The GC content of the DNA sequence is: {gc_content:.2%}")
-    print(f"The total length of the DNA sequence is: {len(ready_dna)}")
-    print(f"The first 50 nucleotides are : {ready_dna[:50]}") 
+    print(f"The total length of the DNA sequence is: {len(clean_dna)}")
+    print(f"The first 50 nucleotides are : {clean_dna[:50]}") 
 except Exception as e:
     print(e)
