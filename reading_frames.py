@@ -42,6 +42,19 @@ for i in data.splitlines():
 
 # print(seq.values())
 
+def reverse_comp(dna_seq):
+    comp = ""
+    for i in dna_seq :
+        comp_base = complement.get(i)
+        comp += comp_base
+        rev_comp = comp[::-1]
+    # print(f"Original DNA: {dna}")
+    # print(f"Complementary DNA: {comp}") 
+    # print(f"Reverse Complement DNA: {rev_comp}")
+    return rev_comp
+
+
+
 def codon_break(seq_dict):
     transation = {"Frame 1":{},
                    "Frame 2":{},
@@ -54,11 +67,12 @@ def codon_break(seq_dict):
      for org, seq in seq_dict.items():
          codons = []
          protein = ""
+         rev_comp_dna = reverse_comp(seq)
          for dna in range(frame,len(seq),3):
             codon = seq[dna:dna+3]
             if len(codon) == 3:
              codons.append(codon)
-             aa = codon_table.get(codon)
+             aa = codon_table.get(codon) 
             if aa == None:
                 continue
             if aa == "*":
@@ -70,6 +84,7 @@ def codon_break(seq_dict):
 
 dna_cod,dna_to_protein = codon_break(seq)
 print(dna_cod)
+print("\nTranslated into proteins:\n")
 print(dna_to_protein) 
 
 
