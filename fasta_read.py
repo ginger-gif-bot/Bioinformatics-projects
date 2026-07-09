@@ -75,3 +75,4 @@ for name, cod in codons_in_dna.items():
 for animal, pro_seq in protein.items():
     
  print(f"{animal}:\t{[pro_seq]}\n") 
+
