@@ -25,4 +25,5 @@ print(g_count)
 with open("result.txt","w") as f:
     f.write(str(dna))
     f.write("\n")
-    f.write(str(g_count))
+    for name, count in g_count.items():
+     f.write(f"{name}\t{count}\n")
