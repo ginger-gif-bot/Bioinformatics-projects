@@ -58,28 +58,38 @@ def reverse_comp(dna_seq):
 def codon_break(seq_dict):
     transation = {"Frame 1":{},
                    "Frame 2":{},
-                   "Frame 3":{}}
+                   "Frame 3":{},
+                   "Frame 4":{},
+                   "Frame 5":{},
+                   "Frame 6":{}}
     dna_codons = {"Frame 1":{},
                    "Frame 2":{},
-                   "Frame 3":{}}
-    for frame in range(3):
-     frame_key = f"Frame {frame + 1}"       
-     for org, seq in seq_dict.items():
-         codons = []
-         protein = ""
+                   "Frame 3":{},
+                   "Frame 4":{},
+                   "Frame 5":{},
+                   "Frame 6":{}}
+           
+    for org, seq in seq_dict.items():        
          rev_comp_dna = reverse_comp(seq)
-         for dna in range(frame,len(seq),3):
-            codon = seq[dna:dna+3]
-            if len(codon) == 3:
-             codons.append(codon)
-             aa = codon_table.get(codon) 
-            if aa == None:
-                continue
-            if aa == "*":
-                break
-            protein += aa
-         transation[frame_key][org] = protein 
-         dna_codons[frame_key][org] = codons     
+         strands = {seq : 0, rev_comp_dna: 3}
+         for strand_seq, offset in strands.items():
+           print(f"offset = {offset}, strand starts with: {strand_seq[:10]}")
+           for frame in range(3):
+            codons = []
+            protein = ""
+            frame_key = f"Frame {frame + 1+ offset}"
+            for dna in range(frame,len(seq),3):
+             codon = strand_seq[dna:dna+3] 
+             if len(codon) == 3:
+                codons.append(codon)
+                aa = codon_table.get(codon) 
+             if aa == None:
+                    continue
+             if aa == "*":
+                    break
+             protein += aa
+            transation[frame_key][org] = protein 
+            dna_codons[frame_key][org] = codons     
     return dna_codons,transation 
 
 dna_cod,dna_to_protein = codon_break(seq)
