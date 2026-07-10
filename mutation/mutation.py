@@ -26,3 +26,35 @@ def length_of_seq(dna_dict):
     return length
 print(length_of_seq(dna))
 
+complement = {
+    "A":"T",
+    "T":"A",
+    "G":"C",
+    "C":"G"
+}
+def rev_comp(dna_seq):
+    comp_dna = ""
+    for i in dna_seq:
+        comp = complement.get(i)
+        comp_dna += comp
+        rev_comp_dna = comp_dna[::-1]
+    return rev_comp_dna
+
+def codon_breakage(dna_dict):
+    dna_codons = {}
+    for org, seq in dna_dict.items():
+        codons_broken = []
+        print(f"the complements are: {rev_comp(seq)}")
+        strands = {
+            seq:0,
+            rev_comp(seq):3
+        }
+        
+        for base in range(0,len(seq),3):
+         codon = seq[base:base+3]
+         if len(codon) == 3:
+             codons_broken.append(codon)
+             dna_codons[org] = codons_broken 
+    return dna_codons
+
+print(codon_breakage(dna)) 
