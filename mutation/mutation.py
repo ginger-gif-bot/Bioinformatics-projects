@@ -107,3 +107,19 @@ def translation(codon_dict):
 print("\nProtein Translation:\n")
 print(translation(codon_breakage(dna)))
 
+def mutations(codon_dict,org_a,org_b):
+   syn = []
+   nsyn = []
+   for frame, info in codon_dict.items():
+     for cod_a, cod_b in zip(info[org_a],info[org_b]):
+          aa_a = codon_table.get(cod_a)
+          aa_b = codon_table.get(cod_b)
+          if cod_a == cod_b:
+             continue
+          elif aa_a == aa_b:
+             syn.append((f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
+          else:
+             nsyn.append((f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
+             
+   return f"Synonymous Mutations:{syn}\nNon-synonymous Mutations:{nsyn}"
+print(mutations(codon_breakage(dna),"human","mouse")) 
