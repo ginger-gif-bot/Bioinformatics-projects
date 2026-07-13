@@ -26,6 +26,14 @@ def length_of_seq(dna_dict):
     return length
 print(length_of_seq(dna))
 
+def gc_content(dna_dict):
+    gc_content = {}
+    for org, seq in dna_dict.items():
+        value = round(((seq.count("G") + seq.count("C"))/len(seq))*100,2)
+        gc_content[org] = value
+    return gc_content
+print(gc_content(dna))
+
 complement = {
     "A":"T",
     "T":"A",
@@ -120,6 +128,6 @@ def mutations(codon_dict,org_a,org_b):
              syn.append((f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
           else:
              nsyn.append((f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
-             
-   return f"Synonymous Mutations:{syn}\nNon-synonymous Mutations:{nsyn}"
+     return syn, nsyn        
 print(mutations(codon_breakage(dna),"human","mouse")) 
+
