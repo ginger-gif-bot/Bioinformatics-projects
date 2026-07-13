@@ -125,9 +125,8 @@ def mutations(codon_dict,org_a,org_b):
           if cod_a == cod_b:
              continue
           elif aa_a == aa_b:
-             syn.append((f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
+             syn.append((frame,f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
           else:
-             nsyn.append((f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
-     return syn, nsyn        
+             nsyn.append((frame,f"{cod_a} -> {cod_b}",f"{aa_a} -> {aa_b}"))
+   return syn, nsyn        
 print(mutations(codon_breakage(dna),"human","mouse")) 
-
