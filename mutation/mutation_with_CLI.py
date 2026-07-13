@@ -1,12 +1,14 @@
 from tabulate import tabulate
-with open("dna.fasta","w") as f:
-    f.write(">human\n")
-    f.write("ATGCTGACATAG\n")
-    f.write(">mouse\n")
-    f.write("ATGTTGACAGAT")
+import sys
 
-with open("dna.fasta","r") as f:
-    data = f.read()
+if len(sys.argv) <2:
+   print("Error:Please provide all files")
+   sys.exit()
+
+data_dna = sys.argv[1]
+
+with open(data_dna,"r") as f:
+   data = f.read()
 
 def clean_data(fasta_seq):
     cleaned_data = {}
@@ -44,7 +46,6 @@ def rev_comp(dna_seq):
         comp_dna += comp
         rev_comp_dna = comp_dna[::-1]
     return rev_comp_dna
-
 
 def codon_breakage(dna_dict):
     dna_codons = {"Frame 1":{},
